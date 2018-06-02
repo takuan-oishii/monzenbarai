@@ -1,0 +1,23 @@
+require 'monzenbarai'
+require 'fileutils'
+require 'thor'
+
+module Monzenbarai
+  class CLI < Thor
+    desc 'start', 'start maintenance mode'
+
+    def start
+      FileUtils.touch Monzenbarai.configuration.trigger_file
+      puts 'monzenbarai maintenance was started'
+    end
+
+    desc 'end', 'end maintenance mode'
+
+    def end
+      FileUtils.rm Monzenbarai.configuration.trigger_file
+      puts 'monzenbarai maintenance was ended'
+    end
+  end
+end
+
+Monzenbarai::CLI.start(ARGV)
