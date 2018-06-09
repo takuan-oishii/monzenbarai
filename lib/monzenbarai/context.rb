@@ -8,7 +8,7 @@ module Monzenbarai
       p 'メンテ'
 
       if render_maintenance?(env)
-        [503, { 'Content-Type' => 'text/html' }, ['<h1>maintenance</h1>']]
+        [503, { 'Content-Type' => 'text/html', 'Retry-After' => '7200', 'Cache-Control' => 'no-cache' }, ['<h1>maintenance</h1>']]
       else
         @app.call env
       end
