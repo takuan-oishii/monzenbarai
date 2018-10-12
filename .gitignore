@@ -6,3 +6,12 @@
 /pkg/
 /spec/reports/
 /tmp/
+
+/examples/ruby_on_rails/.bundle
+/examples/ruby_on_rails/vendor/bundle
+/examples/ruby_on_rails/vendor/bin
+/examples/ruby_on_rails/log/*
+/examples/ruby_on_rails/tmp/*
+/examples/ruby_on_rails/db/*.sqlite3
+!/examples/ruby_on_rails/log/.keep
+!/examples/ruby_on_rails/tmp/.keep
