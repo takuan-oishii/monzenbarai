@@ -4,18 +4,22 @@ require 'thor'
 
 module Monzenbarai
   class CLI < Thor
-    desc 'start', 'start maintenance mode'
+    desc 'start CONFIG_FILE', 'start maintenance mode'
 
-    def start
-      FileUtils.touch Monzenbarai.configuration.trigger_file
-      puts 'monzenbarai maintenance was started'
+    def start(config_file)
+      require File.expand_path(config_file)
+
+      FileUtils.touch File.expand_path(Monzenbarai.configuration.trigger_file)
+      puts 'maintenance was started'
     end
 
-    desc 'end', 'end maintenance mode'
+    desc 'end CONFIG_FILE', 'end maintenance mode'
 
-    def end
+    def end(config_file)
+      require File.expand_path(config_file)
+
       FileUtils.rm Monzenbarai.configuration.trigger_file
-      puts 'monzenbarai maintenance was ended'
+      puts 'maintenance was ended'
     end
   end
 end
