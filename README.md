@@ -20,33 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-### Configure
+Make config file.
 
-Sinatra 
 ```ruby
-require 'monzenbarai'
-
 Monzenbarai.configure do |config|
   config.expel = lambda do |env|
     return false if env['PATH_INFO'] == '/allowed'
     true
   end
-end
-
-use Monzenbarai
-```
-
-Ruby on Rails
-```ruby:config/application.rb
-config.middleware.use Monzenbarai
-```
-
-```ruby:config/initializers/monzenbarai.rb
-Monzenbarai.configure do |config|
-  config.expel = lambda do |env|
-    return false if env['PATH_INFO'] == '/allowed'
-    true
-  end
+  
+  config.trigger_file = 'path/to/trigger_file'
 end
 ```
 
@@ -55,11 +38,22 @@ By default, `expel` always returns only `true`.
 
 `env` argument is [Rack environment](https://www.rubydoc.info/github/rack/rack/master/file/SPEC).
 
+
+Add Monzenbarai middleware  
+
+```ruby
+use Monzenbarai # Sinatra
+config.middleware.use Monzenbarai # Rails
+```
+
 ### Start maintenance mode
-Execute `monzenbarai start` command.
+Execute `monzenbarai start path/to/config_file` command.  
+This command makes `trigger_file`.
+Monzenbarai keep maintenance mode during `trigger_file` exists.  
 
 ### End maintenance mode
-Execute `monzenbarai end` command.
+Execute `monzenbarai end path/to/config_file` command.
+This command removes `trigger_file`.
 
 ## Contributing
 
